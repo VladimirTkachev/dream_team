@@ -1,0 +1,27 @@
+{
+  "name": "dream_team",
+  "version": "1.0.0",
+  "description": "practicing skills",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VladimirTkachev/dream_team.git"
+  },
+  "keywords": [
+    "[js",
+    "react",
+    "webpack",
+    "npm",
+    "json",
+    "redux]"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VladimirTkachev/dream_team/issues"
+  },
+  "homepage": "https://github.com/VladimirTkachev/dream_team#readme"
+}
