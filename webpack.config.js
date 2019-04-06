@@ -1,4 +1,8 @@
 const path = require("path");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+
 
 module.exports = {
     entry: "./src/index.js",
@@ -16,9 +20,19 @@ module.exports = {
                 },
             },
             {
-                test: /\.s?css$/,
-                use: ["style-loader", "css-loader", "postcss-loader", "sass-loader"],
+                test: /\.scss$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: ["css-loader", "sass-loader"],
+                }),
+                // use: ["style-loader", "css-loader", "sass-loader"],
             },
         ],
     },
+    plugins: [
+        new ExtractTextPlugin("style.css"),
+        new HtmlWebpackPlugin({
+            template: "./src/index.html",
+        }),
+    ],
 };
