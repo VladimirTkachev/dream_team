@@ -4,7 +4,7 @@
   "description": "practicing skills",
   "main": "index.js",
   "scripts": {
-    "start:dev": "webpack --mode development --watch",
+    "start:dev": "webpack-dev-server --mode development --open --hot",
     "build": "webpack --mode production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -41,7 +41,8 @@
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "webpack": "^4.29.6",
-    "webpack-cli": "^3.3.0"
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.2.1"
   },
   "dependencies": {
     "prop-types": "^15.7.2",
