@@ -1,48 +1,22 @@
 import React from "react";
-import { connect } from "react-redux";
-// import PropTypes from "prop-types";
-
-import { getAuthors } from "../reducers/authors";
-import { getAuthors as getAuthorsAction } from "../actions/authors";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./app.scss";
+
+import AuthorsListContainer from "../Components/Containers/AuthorsListContainers";
+import AuthorContainer from "../Components/Containers/AuthorContainer";
 
 /**
  * Рутовый компнент
  */
 class App extends React.Component {
-    componentDidMount() {
-        const { getAuthorsAction } = this.props;
-
-        getAuthorsAction();
-    }
-
     render() {
-        const { authors } = this.props;
-
         return (
-            <div className="app">
-                <h1 className="app__title">
-                    {"Test"}
-                    {authors ?
-                        authors.map((item, index) => (
-                            <div key={index}>
-                                {item.FirstName}
-                            </div>
-                        ))
-                        : null
-                    }
-                </h1>
-            </div>
+            <Router basename="/">
+                <Route  path="/" exact component={AuthorsListContainer}/>
+                <Route  path="/:id" component={AuthorContainer}/>
+            </Router>
         );
     }
 }
 
-const mapStateToProps = (state = {}) => {
-    const authors = getAuthors(state);
-
-    return {
-        authors,
-    }
-}
-
-export default connect(mapStateToProps, { getAuthorsAction })(App);
+export default App;
