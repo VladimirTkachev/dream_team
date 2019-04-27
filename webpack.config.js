@@ -5,20 +5,13 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 
 module.exports = {
-    entry: "./src/index.js",
+    entry: "./src/index.tsx",
     output: {
         path: path.join(__dirname, "/dist"),
         filename: "bundle.js",
     },
     module: {
         rules: [
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: "babel-loader",
-                },
-            },
             {
                 test: /\.scss$/,
                 use: ExtractTextPlugin.extract({
@@ -27,9 +20,21 @@ module.exports = {
                 }),
                 // use: ["style-loader", "css-loader", "sass-loader"],
             },
+            {
+                test: /\.tsx?$/,
+                loader: "ts-loader",
+            },
+            {
+                enforce: "pre",
+                test: /\.js$/,
+                loader: "source-map-loader"
+            },
         ],
     },
-    devtool: "cheap-module-source-map",
+    devtool: "source-map",
+    resolve: {
+        extensions: [".ts", ".tsx", ".js", ".json"]
+    },
     plugins: [
         new ExtractTextPlugin("style.css"),
         new HtmlWebpackPlugin({

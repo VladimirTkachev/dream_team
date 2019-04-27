@@ -1,11 +1,16 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { getAuthors } from "../../reducers/authors";
+import { getAuthors, IAuthorsState } from "../../reducers/authors";
 import { getAuthors as getAuthorsAction } from "../../actions/authors";
 import AuthorsList from "../Blocks/AuthorsList";
 
-class AuthorsListContainer extends React.Component {
+interface IProps {
+    authors: IAuthorsState;
+    getAuthorsAction: ():
+}
+
+class AuthorsListContainer extends React.Component<IProps, {}> {
     componentDidMount() {
         const { getAuthorsAction } = this.props;
 

@@ -1,5 +1,17 @@
 import authorConstants from "../constants/authors";
 
+export type IAuthor = {
+    ID: number;
+    FirstName: string;
+    IDBook: number;
+    LastName: string;
+}
+
+export interface IAuthorsState {
+    authors: Array<IAuthor>;
+    loading: boolean;
+}
+
 export const getAuthors = (state = {}) => {
     const { authors: {authors} } = state;
 
@@ -12,7 +24,7 @@ const initialState = {
     loading: false,
 };
 
-export default (state = initialState, action = {}) => {
+export default (state: IAuthorsState = initialState, action: Action = {}) => {
     const { type } = action;
 
     switch (type) {

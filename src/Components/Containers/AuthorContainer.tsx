@@ -1,6 +1,17 @@
 import React from "react";
 
-class AuthorContainer extends React.Component {
+
+type params = {
+    id?: Number;
+}
+
+interface IProps {
+    match: {
+        params: params;
+    };
+}
+
+class AuthorContainer extends React.Component<IProps, {}> {
     render() {
         const { match : { params = {} } } = this.props;
         const { id } = params;

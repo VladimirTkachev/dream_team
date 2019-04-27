@@ -1,13 +1,19 @@
-import { createStore, compose, applyMiddleware } from "redux";
+import { Store, createStore, compose, applyMiddleware } from "redux";
 import {createLogger} from 'redux-logger';
 import thunk from "redux-thunk";
+import * as process from "process";
+
 import reducers from "../reducers";
+import { IAuthorsState } from "../reducers/authors";
+
+interface IStore {
+  authors: IAuthorsState;
+}
 
 /**
  * Глобальный объект redux store
  */
-
-function createReduxStore() {
+function createReduxStore(): Store<IStore> {
     let composeEnhancers = compose;
 
     if (process.env.NODE_ENV === "development") {
@@ -40,7 +46,20 @@ function createReduxStore() {
       }
 
     return store;
-};
+}
 
 
 export default createReduxStore();
+
+// export default function configureStore(): Store<types.AppState> {
+//   const store = createStore(
+//       rootReducer,
+//       initialState,
+//       compose(
+//           applyMiddleware(
+//               thunk,
+//               createLogger()
+//           ))
+//       );
+//   return store;
+// }

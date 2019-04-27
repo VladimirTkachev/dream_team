@@ -8,7 +8,7 @@ import AuthorContainer from "../Components/Containers/AuthorContainer";
 /**
  * Рутовый компнент
  */
-class App extends React.Component {
+class App extends React.Component<{}, {}> {
     render() {
         return (
             <Router basename="/">
