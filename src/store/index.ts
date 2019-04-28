@@ -1,12 +1,12 @@
 import { Store, createStore, compose, applyMiddleware } from "redux";
-import {createLogger} from 'redux-logger';
+import { createLogger } from 'redux-logger';
 import thunk from "redux-thunk";
 import * as process from "process";
 
 import reducers from "../reducers";
 import { IAuthorsState } from "../reducers/authors";
 
-interface IStore {
+export interface IStore {
   authors: IAuthorsState;
 }
 
@@ -14,21 +14,14 @@ interface IStore {
  * Глобальный объект redux store
  */
 function createReduxStore(): Store<IStore> {
-    let composeEnhancers = compose;
+    // let composeEnhancers = compose;
 
-    if (process.env.NODE_ENV === "development") {
-      if (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) {
-        console.warn("[i] [Services/Redux] Redux Devtools Extention is supported");
-        composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
-      } else {
-        console.warn("[i] [Services/Redux] Redux Devtools Extention is not supported");
-      }
-
-    }
+    const composeEnhancers = process.env.NODE_ENV === "development" &&
+      (window && (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
     const store = createStore(
         reducers,
-        {},
+        undefined,
         composeEnhancers(
             applyMiddleware(thunk, createLogger()),
         ),

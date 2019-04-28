@@ -1,13 +1,18 @@
 import React from "react";
 import { connect } from "react-redux";
+import { ThunkDispatch } from "redux-thunk";
 
-import { getAuthors, IAuthorsState } from "../../reducers/authors";
+import { IAuthorsState } from "../../reducers/authors";
 import { getAuthors as getAuthorsAction } from "../../actions/authors";
 import AuthorsList from "../Blocks/AuthorsList";
+import { IAuthor } from "../../reducers/authors";
+import { AuthorsActions } from "../../actions/authors";
+import { IStore } from "../../store";
+import { autors } from '../../api/index';
 
 interface IProps {
     authors: IAuthorsState;
-    getAuthorsAction: ():
+    getAuthorsAction: () => Promise<IAuthor[]>
 }
 
 class AuthorsListContainer extends React.Component<IProps, {}> {
@@ -18,7 +23,7 @@ class AuthorsListContainer extends React.Component<IProps, {}> {
     }
 
     render() {
-        const { authors } = this.props;
+        const { authors: { authors } } = this.props;
 
         return (
             <AuthorsList items={authors}/>
@@ -26,12 +31,24 @@ class AuthorsListContainer extends React.Component<IProps, {}> {
     }
 }
 
-const mapState = (state = {}) => {
-    const authors = getAuthors(state);
+// const mapState = (state = {}) => {
+//     const authors = getAuthors(state);
+
+//     return {
+//         authors,
+//     }
+// }
+
+const mapState = ({ authors }: IStore): { authors: IAuthorsState } => {
+    // const authors = getAuthors(state);
 
     return {
         authors,
     }
 }
 
-export default connect(mapState, { getAuthorsAction })(AuthorsListContainer);
+const mapDispatch = (dispatch: ThunkDispatch<IStore, void, AuthorsActions>) => ({
+    getAuthorsAction: () => dispatch(getAuthorsAction())
+  });
+
+export default connect(mapState, mapDispatch)(AuthorsListContainer);

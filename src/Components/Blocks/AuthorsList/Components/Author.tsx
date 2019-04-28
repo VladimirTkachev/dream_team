@@ -1,8 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { IAuthor } from "../../../../reducers/authors";
 
-function Author(props) {
-    const { item = [] } = props;
+interface IProps {
+    item: IAuthor;
+}
+
+const Author = ({ item }: IProps) => {
     const { ID, FirstName } = item;
 
     return (

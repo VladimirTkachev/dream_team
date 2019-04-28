@@ -1,26 +1,30 @@
-// import { Dispatch } from 'redux'
-import {  ThunkDispatch as Dispatch } from "redux-thunk";
+import { ActionCreator, Action, AnyAction  } from 'redux'
+import {  ThunkDispatch, ThunkAction } from "redux-thunk";
 
 import authorConstants from "../constants/authors";
 import { autors } from "../api";
 import { IAuthor } from "../reducers/authors";
+import { IStore } from "../store";
 
-export type IFetchingAuthors =  {
+
+export type IFetchingAuthors = {
     type: string;
 }
 
-export type IFetchAuthors =  {
+export type IFetchAuthors = {
     type: string;
     payload: Array<IAuthor>;
 }
 
-export type IFetchAuthorsSuccess =  {
+export type IFetchAuthorsSuccess = {
     type: string;
 }
 
-export type IFetchAuthorsError =  {
+export type IFetchAuthorsError = {
     type: string;
 }
+
+export type AuthorsActions = IFetchingAuthors | IFetchAuthors | IFetchAuthorsSuccess | IFetchAuthorsError
 
 
 const fetchingAuthors = (): IFetchingAuthors => ({
@@ -40,7 +44,8 @@ const fetchAuthorsError = (): IFetchAuthorsError => ({
     type: authorConstants.FETCH_AUTHORS_ERROR,
 });
 
-export const getAuthors = () => (dispatch: Dispatch): Promise<IAuthor[]> => {
+// export const getAuthors = () => (dispatch: ThunkDispatch<any, any, IFetchAuthors>): Promise<IAuthor[]> => {
+export const getAuthors = () => (dispatch: ThunkDispatch<IStore ,void, AuthorsActions>): Promise<IAuthor[] | Promise<IFetchAuthorsError>> => {
     dispatch(fetchingAuthors);
 
     return autors.getAuthors()
@@ -49,7 +54,7 @@ export const getAuthors = () => (dispatch: Dispatch): Promise<IAuthor[]> => {
 
             return dispatch(fetchAuthors(res));
         })
-        .catch(err: viod => {
+        .catch((err: void) => {
             dispatch(fetchAuthorsError);
         });
 }

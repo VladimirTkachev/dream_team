@@ -2,12 +2,12 @@ import React from "react";
 
 
 type params = {
-    id?: Number;
+    id?: Number
 }
 
 interface IProps {
     match: {
-        params: params;
+        params: params
     };
 }
 

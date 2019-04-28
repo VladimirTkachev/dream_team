@@ -1,9 +1,13 @@
 import React from "react";
 
 import Author from "./Components/Author";
+import { IAuthor } from "../../../reducers/authors";
 
-function AuthorsList(props) {
-    const { items = [] } = props;
+interface IProps {
+    items: IAuthor[];
+}
+
+const AuthorsList = ({ items } : IProps ) => {
     const newItems = items.slice(0, 10);
 
     return (

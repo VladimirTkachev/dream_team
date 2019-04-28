@@ -1,4 +1,8 @@
+import { Action } from "redux";
+import { ThunkAction } from "redux-thunk";
 import authorConstants from "../constants/authors";
+import { AuthorsActions } from "../actions/authors";
+// import { IStore } from "../actions/authors";
 
 export type IAuthor = {
     ID: number;
@@ -12,11 +16,12 @@ export interface IAuthorsState {
     loading: boolean;
 }
 
-export const getAuthors = (state = {}) => {
-    const { authors: {authors} } = state;
+// export const getAuthors = (state = {}) => {
+//     // const { authors: {authors} } = state;
+//     const { authors } = state;
 
-    return authors;
-}
+//     return authors ? authors.authors : [];
+// }
 
 const initialState = {
     /** Массив списков авторов */
@@ -24,7 +29,7 @@ const initialState = {
     loading: false,
 };
 
-export default (state: IAuthorsState = initialState, action: Action = {}) => {
+export default (state: IAuthorsState = initialState, action: AuthorsActions) => {
     const { type } = action;
 
     switch (type) {
