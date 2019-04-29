@@ -2,8 +2,6 @@ const path = require("path");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-
-
 module.exports = {
     entry: "./src/index.tsx",
     output: {
@@ -23,6 +21,8 @@ module.exports = {
             {
                 test: /\.tsx?$/,
                 loader: "ts-loader",
+                // test: /\.jsx?$/,
+                // loader: "babel-loader",
             },
             {
                 enforce: "pre",
@@ -33,7 +33,10 @@ module.exports = {
     },
     devtool: "source-map",
     resolve: {
-        extensions: [".ts", ".tsx", ".js", ".json"]
+        extensions: [".ts", ".tsx", ".js", ".json"],
+        alias: {
+            "Project": path.resolve(__dirname, 'src/'),
+        },
     },
     plugins: [
         new ExtractTextPlugin("style.css"),

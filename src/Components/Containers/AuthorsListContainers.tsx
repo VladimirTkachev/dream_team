@@ -1,29 +1,32 @@
 import React from "react";
-import { connect } from "react-redux";
-import { ThunkDispatch } from "redux-thunk";
+// import { connect } from "react-redux";
+// import { getAuthors as getAuthorsAction } from "Project/actions/authors";
+import AuthorsList from "Project/Components/Blocks/AuthorsList";
+import data from "./data";
 
-import { IAuthorsState } from "../../reducers/authors";
-import { getAuthors as getAuthorsAction } from "../../actions/authors";
-import AuthorsList from "../Blocks/AuthorsList";
-import { IAuthor } from "../../reducers/authors";
-import { AuthorsActions } from "../../actions/authors";
-import { IStore } from "../../store";
-import { autors } from '../../api/index';
-
-interface IProps {
-    authors: IAuthorsState;
-    getAuthorsAction: () => Promise<IAuthor[]>
+type Author = {
+    ID: number;
+    FirstName: string;
+    IDBook: number;
+    LastName: string;
 }
 
-class AuthorsListContainer extends React.Component<IProps, {}> {
-    componentDidMount() {
-        const { getAuthorsAction } = this.props;
-
-        getAuthorsAction();
+type Props = {
+    authors: {
+        authors: Author[],
+        loading: boolean
     }
+}
+
+class AuthorsListContainer extends React.Component<Props,{}> {
+    // componentDidMount() {
+    //     const { getAuthorsAction } = this.props;
+
+    //     getAuthorsAction();
+    // }
 
     render() {
-        const { authors: { authors } } = this.props;
+        const { authors: { authors = data } } = this.props;
 
         return (
             <AuthorsList items={authors}/>
@@ -39,16 +42,17 @@ class AuthorsListContainer extends React.Component<IProps, {}> {
 //     }
 // }
 
-const mapState = ({ authors }: IStore): { authors: IAuthorsState } => {
-    // const authors = getAuthors(state);
+// const mapState = ({ authors }) => {
+//     // const authors = getAuthors(state);
 
-    return {
-        authors,
-    }
-}
+//     return {
+//         authors,
+//     }
+// }
 
-const mapDispatch = (dispatch: ThunkDispatch<IStore, void, AuthorsActions>) => ({
-    getAuthorsAction: () => dispatch(getAuthorsAction())
-  });
+// const mapDispatch = (dispatch) => ({
+//     getAuthorsAction: () => dispatch(getAuthorsAction())
+//   });
 
-export default connect(mapState, mapDispatch)(AuthorsListContainer);
+// export default connect(mapState, mapDispatch)(AuthorsListContainer);
+export default AuthorsListContainer;

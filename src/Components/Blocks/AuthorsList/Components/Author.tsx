@@ -1,12 +1,21 @@
-import React from "react";
+import * as React from "react";
 import { Link } from "react-router-dom";
-import { IAuthor } from "../../../../reducers/authors";
 
-interface IProps {
-    item: IAuthor;
+type Props = {
+    item: {
+        ID: number;
+        FirstName: string;
+        IDBook: number;
+        LastName: string;
+    }
 }
 
-const Author = ({ item }: IProps) => {
+/**
+ * Отображает элемент автора
+ * @param {Object} props Объект данных
+ * @param {object} props.item объект данных автора
+ */
+const Author: React.SFC<Props> = ({ item }) => {
     const { ID, FirstName } = item;
 
     return (
@@ -17,4 +26,14 @@ const Author = ({ item }: IProps) => {
         </div>
     );
 }
+
+Author.defaultProps = {
+    item: {
+        ID: 1,
+        FirstName: 'sdf',
+        IDBook: 2,
+        LastName: 'asd',
+    }
+}
+
 export default Author;

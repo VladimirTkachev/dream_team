@@ -1,13 +1,18 @@
-import React from "react";
-
+import * as React from "react";
 import Author from "./Components/Author";
-import { IAuthor } from "../../../reducers/authors";
 
-interface IProps {
-    items: IAuthor[];
+type item = {
+    ID: number;
+    FirstName: string;
+    IDBook: number;
+    LastName: string;
 }
 
-const AuthorsList = ({ items } : IProps ) => {
+type Props = {
+    items: Array<item>
+}
+
+const AuthorsList: React.SFC<Props> = ({ items }) => {
     const newItems = items.slice(0, 10);
 
     return (

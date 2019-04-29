@@ -1,27 +1,26 @@
-import React from "react";
+import * as React from "react";
+import { RouteComponentProps } from "react-router-dom";
 
-
-type params = {
-    id?: Number
+type RouteInfo = {
+    id?: string;
 }
 
-interface IProps {
-    match: {
-        params: params
-    };
-}
+type ComponentRouteProps = RouteComponentProps<RouteInfo>
+// interface ComponentRouteProps extends RouteComponentProps<RouteInfo> {
+//      additionalProp: anyType
+// }
 
-class AuthorContainer extends React.Component<IProps, {}> {
-    render() {
-        const { match : { params = {} } } = this.props;
-        const { id } = params;
+const AuthorContainer = (props : ComponentRouteProps): JSX.Element => {
+    const { match } = props;
+    const { params = {} } = match;
+    const { id } = params;
 
-        return (
-            <div>
-                {id}
-            </div>
-        );
-    }
-}
+    return (
+        <div>
+            Author
+            {id}
+        </div>
+    );
+};
 
 export default AuthorContainer;

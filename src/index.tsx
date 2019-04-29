@@ -2,13 +2,13 @@ import * as React from "react";
 // import { Store } from "redux";
 import * as ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import configureStore, { IStore } from "./store";
-import App from "./Components/App";
+// import configureStore from "./store";
+import App from "Project/Components/App";
 
-const Main: React.SFC<{}> = () => (
-    <Provider store={configureStore}>
-        <App/>
-    </Provider>
+{/* <Provider store={configureStore}> */}
+{/* </Provider> */}
+const Main = () => (
+    <App/>
 );
 
 ReactDOM.render(<Main/>, document.getElementById("root"));

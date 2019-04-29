@@ -1,10 +1,3 @@
-// interface IActions {
-//     FETCHING_AUTHORS: string;
-//     FETCH_AUTHORS: string;
-//     FETCH_AUTHORS_SUCCESS: string;
-//     FETCH_AUTHORS_ERROR: string;
-// }
-
 const Authors = {
     FETCHING_AUTHORS: "@authors/FETCHING_AUTHORS",
     FETCH_AUTHORS: "@authors/FETCH_AUTHORS",
