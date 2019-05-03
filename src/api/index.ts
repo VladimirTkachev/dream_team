@@ -1,5 +1,5 @@
 import axios from "axios";
-import { AUTHOR_URL } from "../config";
+import { AUTHOR_URL } from "Project/config";
 
 export const authors = {
     getAuthors: () => {

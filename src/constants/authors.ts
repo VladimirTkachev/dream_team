@@ -1,0 +1,9 @@
+export const FETCHING_AUTHORS = "@authors/FETCHING_AUTHORS";
+export const FETCH_AUTHORS = "@authors/FETCH_AUTHORS";
+export const FETCH_AUTHORS_SUCCESS = "@authors/FETCH_AUTHORS_SUCCESS";
+export const FETCH_AUTHORS_ERROR = "@authors/FETCH_AUTHORS_ERROR";
+
+export type FETCHING_AUTHORS = typeof FETCHING_AUTHORS;
+export type FETCH_AUTHORS = typeof FETCH_AUTHORS;
+export type FETCH_AUTHORS_SUCCESS = typeof FETCH_AUTHORS_SUCCESS;
+export type FETCH_AUTHORS_ERROR = typeof FETCH_AUTHORS_ERROR;
