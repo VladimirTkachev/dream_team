@@ -1,8 +1,8 @@
 import { createStore, compose, applyMiddleware, Store } from "redux";
-import { createLogger } from 'redux-logger';
+// import { createLogger } from 'redux-logger';
 import thunk, { ThunkMiddleware } from "redux-thunk";
-import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
-import * as process from "process";
+// import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
+// import * as process from "process";
 
 import reducers from "Project/reducers";
 import { IAuthorsState } from "Project/reducers/authors";

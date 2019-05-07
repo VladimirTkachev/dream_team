@@ -26,10 +26,11 @@ class AuthorsListContainer extends React.Component<Props,{}> {
     // }
 
     render() {
-        const { authors: { authors = data } } = this.props;
+        // const { authors: { authors = data } } = this.props;
 
         return (
-            <AuthorsList items={authors}/>
+            // <AuthorsList items={authors}/>
+            <AuthorsList items={data}/>
         );
     }
 }

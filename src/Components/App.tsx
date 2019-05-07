@@ -12,7 +12,7 @@ class App extends React.Component<{},{}> {
     render() {
         return (
             <Router basename="/">
-                <Route  path="/" exact component={() => <AuthorsListContainer />}/>
+                <Route  path="/" exact component={AuthorsListContainer}/>
                 <Route  path="/:id" component={AuthorContainer}/>
             </Router>
         );
