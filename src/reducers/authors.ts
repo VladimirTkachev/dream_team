@@ -1,4 +1,6 @@
 import { ActionCreator, Dispatch, Action, AnyAction, Reducer } from 'redux';
+
+import { ReducersType } from "Project/reducers";
 import { AuthorsActions } from '../actions/authors';
 import {
     FETCHING_AUTHORS,
@@ -7,12 +9,12 @@ import {
     FETCH_AUTHORS_ERROR,
 } from "Project/constants/authors";
 
-// export const getAuthors = (state = {}) => {
-//     // const { authors: {authors} } = state;
-//     const { authors } = state;
+export const getAuthors = (state: ReducersType) => {
+    // const { authors: {authors} } = state;
+    const { authors } = state;
 
-//     return authors ? authors.authors : [];
-// }
+    return authors ? authors.authors : [];
+}
 
 export type IAuthor = {
     ID: number;

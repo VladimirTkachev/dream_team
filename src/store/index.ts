@@ -1,51 +1,42 @@
 import { createStore, compose, applyMiddleware, Store } from "redux";
-// import { createLogger } from 'redux-logger';
-import thunk, { ThunkMiddleware } from "redux-thunk";
-// import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
-// import * as process from "process";
+import { createLogger } from "redux-logger";
+import thunk from "redux-thunk";
 
-import reducers from "Project/reducers";
-import { IAuthorsState } from "Project/reducers/authors";
+import reducers, { ReducersType } from "Project/reducers";
 import { AuthorsActions } from "Project/actions/authors";
 
-// type ReduxStore = {
-//     authors: IAuthorsState;
-// }
+export type AllActions = AuthorsActions;
 
-// type AllActions =
-//   AuthorsActions
-
-
-// const composeEnhancers = composeWithDevTools({
-//   // Specify here name, actionsBlacklist, actionsCreators and other options
-// });
-
-// const middlewares = applyMiddleware(
-//   thunk as ThunkMiddleware<{}, AllActions>,
-//   createLogger()
-// );
-
-// const store = createStore(
-//   reducers,
-//   composeEnhancers(
-//     middlewares,
-//     // other store enhancers if any
-//   )
-// );
-
-// export interface IStore {
-//   authors: IAuthorsState
-// }
-
-// const configureStore = (initialState?: IStore) => {
-//   return createStore(
-//       reducers,
-//       {},
-//       window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-//   )
-// };
-
-const store = createStore(reducers, applyMiddleware(thunk));
-
-
-export default store;
+/**
+ * Глобальный объект redux store
+ */
+    function createReduxStore() {
+        const composeEnhancers = process.env.NODE_ENV === "development" &&
+        (window && (window as any).REDUX_DEVTOOLS_EXTENSION_COMPOSE) || compose;
+    
+        const store = createStore(
+            reducers,
+            {},
+            composeEnhancers(
+                applyMiddleware(
+                  thunk,
+                  createLogger()
+                ),
+            ),
+        );
+    
+        if (process.env.NODE_ENV === "development") {
+            /* Webpack Redux Hot Module Replacement */
+            if (module.hot) {
+              console.warn("[i] [Services/Redux] Webpack Redux Hot Module Replacement is supported");
+    
+              module.hot.accept("../reducers", () => {
+                store.replaceReducer(require("../reducers").default);
+              });
+            }
+          }
+    
+        return store;
+    }
+    
+    export default createReduxStore();

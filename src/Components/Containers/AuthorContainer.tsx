@@ -6,9 +6,6 @@ type RouteInfo = {
 }
 
 type ComponentRouteProps = RouteComponentProps<RouteInfo>
-// interface ComponentRouteProps extends RouteComponentProps<RouteInfo> {
-//      additionalProp: anyType
-// }
 
 const AuthorContainer = (props : ComponentRouteProps): JSX.Element => {
     const { match } = props;

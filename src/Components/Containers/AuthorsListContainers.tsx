@@ -1,7 +1,13 @@
 import React from "react";
-// import { connect } from "react-redux";
-// import { getAuthors as getAuthorsAction } from "Project/actions/authors";
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
+import { ThunkDispatch } from "redux-thunk"
+
+import { getAuthors as getAuthorsAction } from "Project/actions/authors";
 import AuthorsList from "Project/Components/Blocks/AuthorsList";
+import { ReducersType } from "Project/reducers";
+import { getAuthors } from "Project/reducers/authors";
+
 import data from "./data";
 
 type Author = {
@@ -11,12 +17,16 @@ type Author = {
     LastName: string;
 }
 
-type Props = {
-    authors: {
-        authors: Author[],
-        loading: boolean
-    }
+
+type StateProps = {
+    authors: Author[],
 }
+
+interface DispatchProps {
+    getAuthorsAction: () => void;
+}
+
+type Props = StateProps & DispatchProps
 
 class AuthorsListContainer extends React.Component<Props,{}> {
     // componentDidMount() {
@@ -35,25 +45,19 @@ class AuthorsListContainer extends React.Component<Props,{}> {
     }
 }
 
-// const mapState = (state = {}) => {
-//     const authors = getAuthors(state);
+const mapState = (state: ReducersType, {}): StateProps => {
+    const authors = getAuthors(state);
 
-//     return {
-//         authors,
-//     }
-// }
+    return {
+        authors,
+    }
+}
 
-// const mapState = ({ authors }) => {
-//     // const authors = getAuthors(state);
+// (dispatch: ThunkDispatch<{}, {}, any>, ownProps: OwnProps): DispatchProps
 
-//     return {
-//         authors,
-//     }
-// }
+const mapDispatch = (dispatch: ThunkDispatch<ReducersType, {}, any>, ownProps: {}): DispatchProps => ({
+    getAuthorsAction: () => dispatch(getAuthorsAction())
+  });
 
-// const mapDispatch = (dispatch) => ({
-//     getAuthorsAction: () => dispatch(getAuthorsAction())
-//   });
-
-// export default connect(mapState, mapDispatch)(AuthorsListContainer);
-export default AuthorsListContainer;
+export default connect<StateProps, DispatchProps, {}>(mapState, mapDispatch,)(AuthorsListContainer);
+// export default AuthorsListContainer;
